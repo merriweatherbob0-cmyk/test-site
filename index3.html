@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Кофейный котик — уютная кофейня в Москве с авторским кофе, десертами и настоящими котиками.">
+<title>Кофейный котик — Мурчим от счастья с каждой чашкой</title>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 80px;
+    }
+
+    body {
+        font-family: 'Georgia', 'Times New Roman', serif;
+        background: linear-gradient(135deg, #faf3e7 0%, #f5ebe0 100%);
+        color: #3c2415;
+        line-height: 1.6;
+        overflow-x: hidden;
+    }
+
+    :root {
+        --beige: #f5ebe0;
+        --cream: #faf3e7;
+        --brown: #6f4e37;
+        --dark-brown: #3c2415;
+        --caramel: #d4a574;
+        --light-caramel: #e8c9a0;
+        --white: #fffdf9;
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    img {
+        max-width: 100%;
+        display: block;
+    }
+
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    section {
+        padding: 80px 0;
+    }
+
+    h2 {
+        font-size: 2.5rem;
+        color: var(--dark-brown);
+        text-align: center;
+        margin-bottom: 50px;
+        position: relative;
+    }
+
+    h2::after {
+        content: "☕";
+        display: block;
+        font-size: 1.5rem;
+        margin-top: 10px;
+    }
+
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: rgba(250, 243, 231, 0.98);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 2px 15px rgba(60, 36, 21, 0.1);
+        z-index: 1000;
+        transition: all 0.3s ease;
+    }
+
+    nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .logo {
+        font-size: 1.6rem;
+        font-weight: bold;
+        color: var(--dark-brown);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .logo span {
+        font-size: 1.8rem;
+    }
+
+    .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 30px;
+    }
+
+    .nav-links a {
+        color: var(--brown);
+        font-size: 1rem;
+        font-weight: 600;
+        position: relative;
+        transition: color 0.3s ease;
+    }
+
+    .nav-links a::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: var(--caramel);
+        transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover {
+        color: var(--caramel);
+    }
+
+    .nav-links a:hover::after {
+        width: 100%;
+    }
+
+    .burger {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+        background: none;
+        border: none;
+    }
+
+    .burger span {
+        width: 28px;
+        height: 3px;
+        background-color: var(--dark-brown);
+        border-radius: 3px;
+        transition: all 0.3s ease;
+    }
+
+    .hero {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background: linear-gradient(135deg, rgba(245,235,224,0.9), rgba(232,201,160,0.9)), 
+                    url('https://images.unsplash.com/photo-1501339850047-83e777c2a766?w=1920') center/cover;
+        padding-top: 80px;
+        position: relative;
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 1;
+        padding: 20px;
+    }
+
+    .hero h1 {
+        font-size: 4rem;
+        color: var(--dark-brown);
+        margin-bottom: 20px;
+        line-height: 1.2;
+        text-shadow: 2px 2px 4px rgba(255,255,255,0.5);
+    }
+
+    .hero h1 .cat {
+        display: inline-block;
+        font-size: 4.5rem;
+        animation: wiggle 3s infinite;
+    }
+
+    @keyframes wiggle {
+        0%, 100% { transform: rotate(0deg); }
+        25% { transform: rotate(-10deg); }
+        75% { transform: rotate(10deg); }
+    }
+
+    .hero p {
+        font-size: 1.8rem;
+        color: var(--brown);
+        margin-bottom: 40px;
+        font-style: italic;
+    }
+
+    .btn {
+        display: inline-block;
+        background-color: var(--caramel);
+        color: var(--white);
+        padding: 15px 40px;
+        border-radius: 50px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(212, 165, 116, 0.4);
+    }
+
+    .btn:hover {
+        background-color: var(--brown);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(111, 78, 55, 0.4);
+    }
+
+    .about {
+        background-color: var(--white);
+    }
+
+    .about-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+        align-items: center;
+    }
+
+    .about-image {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(111, 78, 55, 0.2);
+    }
+
+    .about-text h3 {
+        font-size: 2rem;
+        color: var(--dark-brown);
+        margin-bottom: 20px;
+    }
+
+    .about-text p {
+        font-size: 1.1rem;
+        color: var(--brown);
+        margin-bottom: 15px;
+    }
+
+    .menu {
+        background-color: var(--beige);
+    }
+
+    .menu-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+    }
+
+    .menu-card {
+        background-color: var(--white);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 5px 20px rgba(60, 36, 21, 0.1);
+        transition: all 0.4s ease;
+    }
+
+    .menu-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 35px rgba(60, 36, 21, 0.2);
+    }
+
+    .menu-card img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+
+    .menu-card:hover img {
+        transform: scale(1.05);
+    }
+
+    .menu-card-content {
+        padding: 25px;
+        text-align: center;
+    }
+
+    .menu-card h3 {
+        font-size: 1.4rem;
+        color: var(--dark-brown);
+        margin-bottom: 10px;
+    }
+
+    .menu-card p {
+        color: var(--brown);
+        font-size: 0.95rem;
+        margin-bottom: 15px;
+    }
+
+    .menu-card .price {
+        font-size: 1.6rem;
+        font-weight: bold;
+        color: var(--caramel);
+    }
+
+    .promos {
+        background-color: var(--white);
+    }
+
+    .promo-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+
+    .promo-card {
+        background: linear-gradient(135deg, var(--caramel), var(--brown));
+        border-radius: 20px;
+        padding: 40px;
+        color: var(--white);
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+    }
+
+    .promo-card:hover {
+        transform: scale(1.03);
+    }
+
+    .promo-card h3 {
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+    }
+
+    .promo-card .discount {
+        display: inline-block;
+        background-color: var(--white);
+        color: var(--dark-brown);
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-weight: bold;
+        margin-top: 15px;
+    }
+
+    .bonus {
+        background-color: var(--beige);
+    }
+
+    .bonus-content {
+        background-color: var(--white);
+        border-radius: 25px;
+        padding: 50px;
+        box-shadow: 0 10px 30px rgba(60, 36, 21, 0.1);
+        text-align: center;
+    }
+
+    .bonus-steps {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        margin-top: 40px;
+    }
+
+    .bonus-step {
+        padding: 30px 20px;
+        background-color: var(--beige);
+        border-radius: 15px;
+    }
+
+    .bonus-step .step-number {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+        background-color: var(--caramel);
+        color: var(--white);
+        border-radius: 50%;
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 15px;
+    }
+
+    .contacts {
+        background-color: var(--white);
+    }
+
+    .contacts-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 50px;
+    }
+
+    .contact-info {
+        background: linear-gradient(135deg, var(--brown), var(--dark-brown));
+        color: var(--white);
+        padding: 40px;
+        border-radius: 20px;
+    }
+
+    .contact-info h3 {
+        font-size: 1.8rem;
+        margin-bottom: 25px;
+        color: var(--caramel);
+    }
+
+    .contact-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .schedule {
+        background-color: var(--beige);
+        padding: 40px;
+        border-radius: 20px;
+    }
+
+    .schedule-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 12px 0;
+        border-bottom: 1px dashed var(--caramel);
+    }
+
+    footer {
+        background-color: var(--dark-brown);
+        color: var(--beige);
+        text-align: center;
+        padding: 30px 20px;
+    }
+
+    footer .socials {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 15px;
+    }
+
+    footer .socials a {
+        font-size: 1.8rem;
+        transition: transform 0.3s ease;
+    }
+
+    footer .socials a:hover {
+        transform: scale(1.3) rotate(10deg);
+    }
+
+    @media (max-width: 992px) {
+        .menu-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        .about-content,
+        .contacts-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .nav-links {
+            position: fixed;
+            top: 70px;
+            right: -100%;
+            flex-direction: column;
+            background-color: var(--cream);
+            width: 80%;
+            height: calc(100vh - 70px);
+            padding: 40px 20px;
+            transition: right 0.4s ease;
+        }
+        .nav-links.active {
+            right: 0;
+        }
+        .burger {
+            display: flex;
+        }
+        .hero h1 {
+            font-size: 2.5rem;
+        }
+        .menu-grid {
+            grid-template-columns: 1fr;
+        }
+        .promo-grid,
+        .bonus-steps {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <nav>
+        <div class="logo">
+            <span>🐱</span> Кофейный котик
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Главная</a></li>
+            <li><a href="#about">О нас</a></li>
+            <li><a href="#menu">Меню</a></li>
+            <li><a href="#promos">Акции</a></li>
+            <li><a href="#bonus">Бонусы</a></li>
+            <li><a href="#contacts">Контакты</a></li>
+        </ul>
+        <button class="burger" id="burger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </nav>
+</header>
+
+<section class="hero" id="home">
+    <div class="hero-content">
+        <h1>Мурчим от счастья <span class="cat">🐱</span><br>с каждой чашкой</h1>
+        <p>Уютная кофейня, где кофе — это искусство, а гости — семья</p>
+        <a href="#menu" class="btn">Посмотреть меню</a>
+    </div>
+</section>
+
+<section class="about" id="about">
+    <div class="container">
+        <h2>О нашей кофейне</h2>
+        <div class="about-content">
+            <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f47?w=800" 
+                 alt="Интерьер кофейни" class="about-image">
+            <div class="about-text">
+                <h3>Добро пожаловать в «Кофейный котик»!</h3>
+                <p>Мы — маленькая уютная кофейня, где каждая чашка кофе готовится с любовью и заботой.</p>
+                <p>У нас живут два настоящих котика — Мармелад и Бублик!</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="menu" id="menu">
+    <div class="container">
+        <h2>Наше фирменное меню</h2>
+        <div class="menu-grid">
+            <!-- КАПУЧИНО С КОРИЦЕЙ -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=600" 
+                     alt="Капучино с корицей">
+                <div class="menu-card-content">
+                    <h3>Капучино «Бублик»</h3>
+                    <p>Классический капучино с шоколадной посыпкой и корицей</p>
+                    <div class="price">260 ₽</div>
+                </div>
+            </div>
+
+            <!-- РАФ С МЁДОМ -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1534353473418-4cfa6c56fd38?w=600" 
+                     alt="Раф с мёдом">
+                <div class="menu-card-content">
+                    <h3>Раф «Медовый кот»</h3>
+                    <p>Авторский раф с мёдом, сливками и мускатным орехом</p>
+                    <div class="price">320 ₽</div>
+                </div>
+            </div>
+
+            <!-- ЗАВТРАК -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1533089862017-5614ecf5e25b?w=600" 
+                     alt="Завтрак в кофейне">
+                <div class="menu-card-content">
+                    <h3>Завтрак «Кошачье утро»</h3>
+                    <p>Круассаны, ягоды, сыр, кофе и апельсиновый сок</p>
+                    <div class="price">450 ₽</div>
+                </div>
+            </div>
+
+            <!-- ЛАТТЕ -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1570968992193-7e5c8f2c6c6f?w=600" 
+                     alt="Латте">
+                <div class="menu-card-content">
+                    <h3>Мурчащий латте</h3>
+                    <p>Нежный латте с ванильным сиропом и молочной пенкой</p>
+                    <div class="price">290 ₽</div>
+                </div>
+            </div>
+
+            <!-- ЭСПРЕССО -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?w=600" 
+                     alt="Эспрессо">
+                <div class="menu-card-content">
+                    <h3>Кот-эспрессо</h3>
+                    <p>Крепкий итальянский эспрессо с карамельной ноткой</p>
+                    <div class="price">180 ₽</div>
+                </div>
+            </div>
+
+            <!-- МАТЧА -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1515823662972-da6a2e4d3114?w=600" 
+                     alt="Матча латте">
+                <div class="menu-card-content">
+                    <h3>Матча-латте</h3>
+                    <p>Японский чай матча на овсяном молоке</p>
+                    <div class="price">340 ₽</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="promos" id="promos">
+    <div class="container">
+        <h2>Наши акции</h2>
+        <div class="promo-grid">
+            <div class="promo-card">
+                <h3>🐱 Котик-утро</h3>
+                <p>Каждый будний день с 8:00 до 11:00 — скидка на все напитки</p>
+                <span class="discount">−20%</span>
+            </div>
+            <div class="promo-card">
+                <h3>🎁 Приведи друга</h3>
+                <p>Приходите вдвоём и получите второй напиток в подарок</p>
+                <span class="discount">1 + 1 = 3</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="bonus" id="bonus">
+    <div class="container">
+        <h2>Бонусная программа</h2>
+        <div class="bonus-content">
+            <h3>Стань частью «Кошачьего клуба» 🐾</h3>
+            <p>Копите баллы и получайте напитки бесплатно!</p>
+            <div class="bonus-steps">
+                <div class="bonus-step">
+                    <div class="step-number">1</div>
+                    <h4>Регистрация</h4>
+                    <p>Получите карту лояльности</p>
+                </div>
+                <div class="bonus-step">
+                    <div class="step-number">2</div>
+                    <h4>Копите баллы</h4>
+                    <p>10% с каждой покупки</p>
+                </div>
+                <div class="bonus-step">
+                    <div class="step-number">3</div>
+                    <h4>Тратьте</h4>
+                    <p>Оплачивайте до 50% баллами</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="contacts" id="contacts">
+    <div class="container">
+        <h2>Как нас найти</h2>
+        <div class="contacts-grid">
+            <div class="contact-info">
+                <h3>Контакты</h3>
+                <div class="contact-item">
+                    <span>📍</span>
+                    <div>г. Москва, ул. Кошачья, д. 9</div>
+                </div>
+                <div class="contact-item">
+                    <span>📞</span>
+                    <div>+7 (495) 123-45-67</div>
+                </div>
+                <div class="contact-item">
+                    <span>✉️</span>
+                    <div>hello@coffeecat.ru</div>
+                </div>
+            </div>
+            <div class="schedule">
+                <h3>🕐 Часы работы</h3>
+                <div class="schedule-row">
+                    <span>Пн-Пт</span>
+                    <span>08:00 — 22:00</span>
+                </div>
+                <div class="schedule-row">
+                    <span>Сб</span>
+                    <span>09:00 — 23:00</span>
+                </div>
+                <div class="schedule-row">
+                    <span>Вс</span>
+                    <span>10:00 — 22:00</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p><strong>🐱 Кофейный котик</strong> — Мурчим от счастья с каждой чашкой</p>
+    <p>© 2026 Все права защищены</p>
+    <div class="socials">
+        <a href="#">📷</a>
+        <a href="#">✈️</a>
+        <a href="#">💬</a>
+    </div>
+</footer>
+
+<script>
+    const burger = document.getElementById('burger');
+    const navLinks = document.getElementById('navLinks');
+
+    burger.addEventListener('click', () => {
+        burger.classList.toggle('active');
+        navLinks.classList.toggle('active');
+    });
+
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            burger.classList.remove('active');
+            navLinks.classList.remove('active');
+        });
+    });
+</script>
+
+</body>
+</html>
