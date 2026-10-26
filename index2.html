@@ -264,13 +264,11 @@
     }
 
     .about-image {
-        background: linear-gradient(135deg, var(--caramel), var(--brown));
-        border-radius: 20px;
+        width: 100%;
         height: 400px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 10rem;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 20px;
         box-shadow: 0 10px 30px rgba(111, 78, 55, 0.2);
         transition: transform 0.3s ease;
     }
@@ -289,6 +287,18 @@
         font-size: 1.1rem;
         color: var(--brown);
         margin-bottom: 15px;
+    }
+
+    /* ===== Фотографии секций ===== */
+    .section-photo {
+        width: 100%;
+        max-height: 300px;
+        object-fit: cover;
+        object-position: center;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(60, 36, 21, 0.12);
+        margin-bottom: 30px;
+        display: block;
     }
 
     /* ===== Меню ===== */
@@ -601,7 +611,6 @@
 
         .about-image {
             height: 300px;
-            font-size: 8rem;
         }
 
         .hero h1 {
@@ -695,7 +704,6 @@
 
         .about-image {
             height: 220px;
-            font-size: 6rem;
         }
     }
 </style>
@@ -738,8 +746,7 @@
     <div class="container">
         <h2>О нашей кофейне</h2>
         <div class="about-content">
-            <!-- Улучшение 3: Декоративные эмодзи скрыты от скринридеров -->
-            <div class="about-image" aria-hidden="true">🐾☕</div>
+            <img class="about-image" src="pic1.jpg" alt="Интерьер кофейни «Кофейный котик»">
             <div class="about-text">
                 <h3>Добро пожаловать в «Кофейный котик»!</h3>
                 <p>Мы — маленькая уютная кофейня, где каждая чашка кофе готовится с любовью и заботой. Наше название не случайно: мы любим кошек так же сильно, как и ароматный свежесваренный кофе.</p>
@@ -754,6 +761,7 @@
 <section class="menu" id="menu">
     <div class="container">
         <h2>Наше фирменное меню</h2>
+        <img class="section-photo" src="pic2.jpg" alt="Наши фирменные кофейные напитки">
         <div class="menu-grid">
             <div class="menu-card">
                 <div class="emoji" aria-hidden="true">☕</div>
@@ -858,6 +866,7 @@
 <section class="contacts" id="contacts">
     <div class="container">
         <h2>Как нас найти</h2>
+        <img class="section-photo" src="pic3.jpg" alt="Уютная атмосфера кофейни">
         <div class="contacts-grid">
             <div class="contact-info">
                 <h3>Свяжитесь с нами</h3>
